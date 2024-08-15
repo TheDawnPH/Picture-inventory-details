@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg no-print sticky-top" data-bs-theme="dark" style="background-color: black;">
   <div class="container-fluid">
     <a class="navbar-brand" href="/" style="color:white !important;">
-      <img src="https://www.ccf.org.ph/wp-content/uploads/2020/09/CCF-Logo-white-300x300.png" alt="CCF Logo" width="30" class="d-inline-block align-text-top">
+      <img src="logo.png" alt="CCF Logo" width="30" class="d-inline-block align-text-top">
       Picture Inventory System
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
