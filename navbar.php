@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg no-print sticky-top" data-bs-theme="dark" style="background-color: black;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/index.php" style="color:white !important;">
+    <a class="navbar-brand" href="/" style="color:white !important;">
       <img src="https://www.ccf.org.ph/wp-content/uploads/2020/09/CCF-Logo-white-300x300.png" alt="CCF Logo" width="30" class="d-inline-block align-text-top">
       Picture Inventory System
     </a>
@@ -10,13 +10,13 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav" style="font-size: 18px;">
         <li class="nav-item">
-          <a class="nav-link" href="/index.php">Home</a>
+          <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/add.php">Capture Assets</a>
+          <a class="nav-link" href="/add">Capture Assets</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/view.php">View Assets</a>
+          <a class="nav-link" href="/view">View Assets</a>
         </li>
       </ul>
     </div>

@@ -1,0 +1,20 @@
+# Disable Directory listing
+Options -Indexes
+
+# block files which needs to be hidden, specify .example extension of the file
+<Files ~ "\.(env|json|config.js|md|gitignore|gitattributes|lock|git)$">
+    Order allow,deny
+    Deny from all
+    satisfy all
+</Files>
+
+# Enable rewriting
+RewriteEngine On
+
+# Hide .php extension
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L]
+
+# block folders
+RedirectMatch 404 ^/.git/.*$
