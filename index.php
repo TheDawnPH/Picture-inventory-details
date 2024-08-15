@@ -1,11 +1,3 @@
-<?php
-// accesible only if user is on 172.16.x.x network
-if (substr($_SERVER['REMOTE_ADDR'], 0, 8) !== '172.16.') {
-    header('Location: 404.php');
-    exit;
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
