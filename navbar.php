@@ -2,7 +2,6 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="/" style="color:white !important;">
       <img src="logo.png" alt="CCF Logo" width="30" class="d-inline-block align-text-top">
-      Picture Inventory System
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

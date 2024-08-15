@@ -187,13 +187,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <div class="mb-3">
                         <label for="asset_tag" class="form-label">Asset Tag</label>
-                        <input type="text" class="form-control <?php echo (!empty($asset_tag_err)) ? 'is-invalid' : ''; ?>" id="asset_tag" name="asset_tag" value="<?php echo $asset_tag; ?>" required>
+                        <input type="text" class="form-control <?php echo (!empty($asset_tag_err)) ? 'is-invalid' : ''; ?>" id="asset_tag" name="asset_tag" value="<?php echo $asset_tag; ?>" oninput="this.value = this.value.toUpperCase()" required>
                         <div class="invalid-feedback"><?php echo $asset_tag_err; ?></div>
                     </div>
 
                     <div class="mb-3">
                         <label for="serial_number" class="form-label">Serial Number</label>
-                        <input type="text" class="form-control <?php echo (!empty($serial_number_err)) ? 'is-invalid' : ''; ?>" id="serial_number" name="serial_number" value="<?php echo $serial_number; ?>" required>
+                        <input type="text" class="form-control <?php echo (!empty($serial_number_err)) ? 'is-invalid' : ''; ?>" id="serial_number" name="serial_number" value="<?php echo $serial_number; ?>" oninput="this.value = this.value.toUpperCase()" required>
                         <div class="invalid-feedback"><?php echo $serial_number_err; ?></div>
                     </div>
 
