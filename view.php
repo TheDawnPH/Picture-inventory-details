@@ -4,7 +4,7 @@ session_start();
 // Include config file
 include 'config.php';
 
-// Select all assets
+// Select all assets, ordered by creation date
 $sql = "SELECT * FROM assets ORDER BY created_at DESC";
 $result = mysqli_query($conn, $sql);
 ?>
@@ -21,8 +21,7 @@ $result = mysqli_query($conn, $sql);
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <style>
-        .table th,
-        .table td {
+        .table th, .table td {
             vertical-align: middle;
         }
 
@@ -69,10 +68,12 @@ $result = mysqli_query($conn, $sql);
             </div>
         </div>
 
-        <!-- Download Button of all pictures on zip file -->
+        <!-- Download Button -->
         <div class="row mb-4">
-            <div class="col">
-                <a href="download.php" class="btn btn-primary" download>Download All Pictures</a>
+            <div class="col-md-6">
+                <a href="download_images.php" class="btn btn-primary">
+                    <i class="bi bi-download"></i> Download All Images
+                </a>
             </div>
         </div>
 
@@ -115,25 +116,26 @@ $result = mysqli_query($conn, $sql);
             // Search functionality
             $('#search').on('keyup', function() {
                 var value = $(this).val().toLowerCase();
-                $('table tbody tr').filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                $('table tbody tr').each(function() {
+                    var rowText = $(this).text().toLowerCase();
+                    $(this).toggle(rowText.indexOf(value) > -1);
                 });
             });
 
             // Sorting functionality
             $('#sort').on('change', function() {
-                var value = $(this).val();
+                var index = $(this).val();
                 var rows = $('table tbody tr').get();
 
                 rows.sort(function(a, b) {
-                    var A = $(a).children('td').eq(value).text().toUpperCase();
-                    var B = $(b).children('td').eq(value).text().toUpperCase();
+                    var A = $(a).children('td').eq(index).text().toUpperCase();
+                    var B = $(b).children('td').eq(index).text().toUpperCase();
 
                     return A.localeCompare(B);
                 });
 
                 $.each(rows, function(index, row) {
-                    $('table').children('tbody').append(row);
+                    $('table tbody').append(row);
                 });
             });
         });
