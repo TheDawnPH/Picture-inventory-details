@@ -69,6 +69,13 @@ $result = mysqli_query($conn, $sql);
             </div>
         </div>
 
+        <!-- Download Button of all pictures on zip file -->
+        <div class="row mb-4">
+            <div class="col">
+                <a href="download.php" class="btn btn-primary" download>Download All Pictures</a>
+            </div>
+        </div>
+
         <!-- Assets Table -->
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
