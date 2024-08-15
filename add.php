@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// accesible only if user is on 172.16.x.x network
+if (substr($_SERVER['REMOTE_ADDR'], 0, 8) !== '172.16.') {
+    header('Location: 404.php');
+    exit;
+}
+
 // Generate CSRF token if it does not exist
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
