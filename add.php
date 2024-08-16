@@ -180,7 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php } ?>
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
-                <form method="post" enctype="multipart/form-data" autocomplete="off" id="form">
+                <form method="post" enctype="multipart/form-data" autocomplete="off" id="form" name="form">
                     <!-- Add CSRF token as a hidden input -->
                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 
@@ -210,7 +210,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             </form>
             <script>
-                $('#form')[0].reset();
+                document.querySelector('form').onsubmit = e => {
+                    e.target.submit();
+                    e.target.reset();
+                    return false;
+                };
             </script>
         </div>
     </div>
