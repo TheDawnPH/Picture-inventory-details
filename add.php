@@ -180,7 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php } ?>
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
-                <form method="post" enctype="multipart/form-data" autocomplete="off" id="form" name="form">
+                <form method="post" enctype="multipart/form-data" autocomplete="off">
                     <!-- Add CSRF token as a hidden input -->
                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 
@@ -204,17 +204,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="mb-3 justify-content-center d-flex">
-                <button type="submit" class="btn btn-dark btn-lg">
+                <button type="submit" class="btn btn-dark btn-lg" value="Submit" id="btnsubmit" onclick="submitForm()">
                     <i class="bi bi-save"></i> Save Asset Information
                 </button>
             </div>
             </form>
             <script>
-                document.querySelector('form').onsubmit = e => {
-                    e.target.submit();
-                    e.target.reset();
-                    return false;
-                };
+                function submitForm() {
+                    // Get the first form with the name
+                    // Usually the form name is not repeated
+                    // but duplicate names are possible in HTML
+                    // Therefore to work around the issue, enforce the correct index
+                    var frm = document.getElementsByName('contact-form')[0];
+                    frm.submit(); // Submit the form
+                    frm.reset(); // Reset all form data
+                    return false; // Prevent page refresh
+                }
             </script>
         </div>
     </div>
