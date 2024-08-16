@@ -62,6 +62,7 @@ $result = mysqli_query($conn, $sql);
         <div class="row mb-4">
             <div class="col">
                 <select id="sort" class="form-select">
+                    <option value="">Sort by...</option>
                     <option value="0">Sort by Asset Tag</option>
                     <option value="1">Sort by Serial Number</option>
                 </select>
