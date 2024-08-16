@@ -180,7 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php } ?>
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
-                <form method="post" enctype="multipart/form-data" autocomplete="off">
+                <form method="post" enctype="multipart/form-data" autocomplete="off" name="form">
                     <!-- Add CSRF token as a hidden input -->
                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 
@@ -215,7 +215,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Usually the form name is not repeated
                     // but duplicate names are possible in HTML
                     // Therefore to work around the issue, enforce the correct index
-                    var frm = document.getElementsByName('contact-form')[0];
+                    var frm = document.getElementsByName('form')[0];
                     frm.submit(); // Submit the form
                     frm.reset(); // Reset all form data
                     return false; // Prevent page refresh
