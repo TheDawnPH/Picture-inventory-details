@@ -57,7 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (mysqli_stmt_execute($stmt)) {
                 mysqli_stmt_store_result($stmt);
                 if (mysqli_stmt_num_rows($stmt) > 0) {
-                    $serial_number_err = "This serial number is already taken.";
+                    // if serial number is NA or N/A, allow duplicates
+                    if ($input_serial_number == "NA" || $input_serial_number == "N/A") {
+                        $serial_number = $input_serial_number;
+                    } else {
+                        $serial_number_err = "This serial number is already taken.";
+                    }  
                 } else {
                     $serial_number = $input_serial_number;
                 }
