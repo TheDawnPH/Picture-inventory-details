@@ -152,7 +152,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <style>
-
         h1 {
             margin-bottom: 30px;
         }
@@ -181,36 +180,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php } ?>
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
-                <form method="post" enctype="multipart/form-data" autocomplete="off">
+                <form method="post" enctype="multipart/form-data" autocomplete="off" id="form">
                     <!-- Add CSRF token as a hidden input -->
                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 
                     <div class="mb-3">
                         <label for="asset_tag" class="form-label">Asset Tag</label>
                         <input type="text" class="form-control <?php echo (!empty($asset_tag_err)) ? 'is-invalid' : ''; ?>" id="asset_tag" name="asset_tag" value="<?php echo $asset_tag; ?>" oninput="this.value = this.value.toUpperCase()" required maxlength="15"
-                        <div class="invalid-feedback"><?php echo $asset_tag_err; ?></div>
+                            <div class="invalid-feedback"><?php echo $asset_tag_err; ?>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="serial_number" class="form-label">Serial Number</label>
-                        <input type="text" class="form-control <?php echo (!empty($serial_number_err)) ? 'is-invalid' : ''; ?>" id="serial_number" name="serial_number" value="<?php echo $serial_number; ?>" oninput="this.value = this.value.toUpperCase()" required>
-                        <div class="invalid-feedback"><?php echo $serial_number_err; ?></div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="image_path" class="form-label">Image</label>
-                        <input type="file" class="form-control <?php echo (!empty($image_path_err)) ? 'is-invalid' : ''; ?>" id="image_path" name="image_path" accept="image/*" capture="camera" required>
-                        <div class="invalid-feedback"><?php echo $image_path_err; ?></div>
-                    </div>
-
-                    <div class="mb-3 justify-content-center d-flex">
-                        <button type="submit" class="btn btn-dark btn-lg">
-                            <i class="bi bi-save"></i> Save Asset Information
-                        </button>
-                    </div>
-                </form>
             </div>
+
+            <div class="mb-3">
+                <label for="serial_number" class="form-label">Serial Number</label>
+                <input type="text" class="form-control <?php echo (!empty($serial_number_err)) ? 'is-invalid' : ''; ?>" id="serial_number" name="serial_number" value="<?php echo $serial_number; ?>" oninput="this.value = this.value.toUpperCase()" required>
+                <div class="invalid-feedback"><?php echo $serial_number_err; ?></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="image_path" class="form-label">Image</label>
+                <input type="file" class="form-control <?php echo (!empty($image_path_err)) ? 'is-invalid' : ''; ?>" id="image_path" name="image_path" accept="image/*" capture="camera" required>
+                <div class="invalid-feedback"><?php echo $image_path_err; ?></div>
+            </div>
+
+            <div class="mb-3 justify-content-center d-flex">
+                <button type="submit" class="btn btn-dark btn-lg">
+                    <i class="bi bi-save"></i> Save Asset Information
+                </button>
+            </div>
+            </form>
+            <script>
+                $('#form')[0].reset();
+            </script>
         </div>
+    </div>
     </div>
 
     <!-- Footer -->
