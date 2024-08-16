@@ -130,9 +130,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (mysqli_stmt_execute($stmt)) {
                 $s = "Asset added successfully.";
+
+                // Clear form data
+                $asset_tag = $serial_number = $image_path = "";
             } else {
                 $f = "Something went wrong. Please try again later.";
             }
+
             mysqli_stmt_close($stmt);
         }
         mysqli_close($conn);
@@ -180,49 +184,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php } ?>
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
-                <form method="post" enctype="multipart/form-data" autocomplete="off" name="form">
+                <form method="post" enctype="multipart/form-data" autocomplete="off" name="form" onsubmit="return submitForm();">
                     <!-- Add CSRF token as a hidden input -->
                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 
                     <div class="mb-3">
                         <label for="asset_tag" class="form-label">Asset Tag</label>
-                        <input type="text" class="form-control <?php echo (!empty($asset_tag_err)) ? 'is-invalid' : ''; ?>" id="asset_tag" name="asset_tag" value="<?php echo $asset_tag; ?>" oninput="this.value = this.value.toUpperCase()" required maxlength="15"
-                            <div class="invalid-feedback"><?php echo $asset_tag_err; ?>
+                        <input type="text" class="form-control <?php echo (!empty($asset_tag_err)) ? 'is-invalid' : ''; ?>" id="asset_tag" name="asset_tag" value="<?php echo $asset_tag; ?>" oninput="this.value = this.value.toUpperCase()" required maxlength="15">
+                        <div class="invalid-feedback"><?php echo $asset_tag_err; ?></div>
                     </div>
-            </div>
 
-            <div class="mb-3">
-                <label for="serial_number" class="form-label">Serial Number</label>
-                <input type="text" class="form-control <?php echo (!empty($serial_number_err)) ? 'is-invalid' : ''; ?>" id="serial_number" name="serial_number" value="<?php echo $serial_number; ?>" oninput="this.value = this.value.toUpperCase()" required>
-                <div class="invalid-feedback"><?php echo $serial_number_err; ?></div>
-            </div>
+                    <div class="mb-3">
+                        <label for="serial_number" class="form-label">Serial Number</label>
+                        <input type="text" class="form-control <?php echo (!empty($serial_number_err)) ? 'is-invalid' : ''; ?>" id="serial_number" name="serial_number" value="<?php echo $serial_number; ?>" oninput="this.value = this.value.toUpperCase()" required>
+                        <div class="invalid-feedback"><?php echo $serial_number_err; ?></div>
+                    </div>
 
-            <div class="mb-3">
-                <label for="image_path" class="form-label">Image</label>
-                <input type="file" class="form-control <?php echo (!empty($image_path_err)) ? 'is-invalid' : ''; ?>" id="image_path" name="image_path" accept="image/*" capture="camera" required>
-                <div class="invalid-feedback"><?php echo $image_path_err; ?></div>
-            </div>
+                    <div class="mb-3">
+                        <label for="image_path" class="form-label">Image</label>
+                        <input type="file" class="form-control <?php echo (!empty($image_path_err)) ? 'is-invalid' : ''; ?>" id="image_path" name="image_path" accept="image/*" capture="camera" required>
+                        <div class="invalid-feedback"><?php echo $image_path_err; ?></div>
+                    </div>
 
-            <div class="mb-3 justify-content-center d-flex">
-                <button type="submit" class="btn btn-dark btn-lg" value="Submit" id="btnsubmit" onclick="submitForm()">
-                    <i class="bi bi-save"></i> Save Asset Information
-                </button>
+                    <div class="mb-3 justify-content-center d-flex">
+                        <button type="submit" class="btn btn-dark btn-lg" value="Submit" id="btnsubmit">
+                            <i class="bi bi-save"></i> Save Asset Information
+                        </button>
+                    </div>
+                </form>
+
+                <script>
+                    function submitForm() {
+                        // Get the form element
+                        var frm = document.getElementsByName('form')[0];
+
+                        // Perform form submission
+                        frm.submit();
+
+                        // Reset form only if submission is successful
+                        <?php if (isset($s)) { ?>
+                            frm.reset();
+                        <?php } ?>
+
+                        // Prevent page refresh
+                        return false;
+                    }
+                </script>
+
             </div>
-            </form>
-            <script>
-                function submitForm() {
-                    // Get the first form with the name
-                    // Usually the form name is not repeated
-                    // but duplicate names are possible in HTML
-                    // Therefore to work around the issue, enforce the correct index
-                    var frm = document.getElementsByName('form')[0];
-                    frm.submit(); // Submit the form
-                    frm.reset(); // Reset all form data
-                    return false; // Prevent page refresh
-                }
-            </script>
         </div>
-    </div>
     </div>
 
     <!-- Footer -->
