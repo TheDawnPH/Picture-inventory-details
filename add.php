@@ -187,7 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <div class="mb-3">
                         <label for="asset_tag" class="form-label">Asset Tag</label>
-                        <input type="text" class="form-control <?php echo (!empty($asset_tag_err)) ? 'is-invalid' : ''; ?>" id="asset_tag" name="asset_tag" value="<?php echo $asset_tag; ?>" oninput="this.value = this.value.toUpperCase()" required>
+                        <input type="text" class="form-control <?php echo (!empty($asset_tag_err)) ? 'is-invalid' : ''; ?>" id="asset_tag" name="asset_tag" value="<?php echo $asset_tag; ?>" oninput="this.value = this.value.toUpperCase()" required maxlength="15"
                         <div class="invalid-feedback"><?php echo $asset_tag_err; ?></div>
                     </div>
 
