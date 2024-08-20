@@ -36,6 +36,7 @@ if ($conn === false) {
         asset_tag text NOT NULL,
         serial_number TEXT NOT NULL,
         image_path text NOT NULL,
+        visible BOOLEAN DEFAULT 1,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     )";
 
