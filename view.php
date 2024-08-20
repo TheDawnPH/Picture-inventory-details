@@ -5,7 +5,7 @@ session_start();
 include 'config.php';
 
 // Select all assets, ordered by creation date
-$sql = "SELECT * FROM assets ORDER BY created_at DESC WHERE visible = 1";
+$sql = "SELECT * FROM assets ORDER BY created_at DESC WHERE visible = '1'";
 $result = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
