@@ -54,7 +54,7 @@ $result = mysqli_query($conn, $sql);
         <!-- Search Bar -->
         <div class="row mb-3">
             <div class="col">
-                <input type="text" id="search" class="form-control" placeholder="Search assets...">
+                <input type="text" id="search" class="form-control" placeholder="Search assets..." oninput="this.value = this.value.toUpperCase()">
             </div>
         </div>
 
