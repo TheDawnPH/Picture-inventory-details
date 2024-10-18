@@ -18,8 +18,8 @@ date_default_timezone_set('Asia/Manila');
 // database connection
 // Database connection
 define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
+define('DB_USERNAME', 'ccf_inventory');
+define('DB_PASSWORD', 'CCFAlabang!');
 define('DB_NAME', 'inventory');
 define('DB_PORT', '3306');
 

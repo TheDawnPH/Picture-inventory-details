@@ -19,9 +19,11 @@ $result = mysqli_query($conn, $sql);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .table th, .table td {
+        .table th,
+        .table td {
             vertical-align: middle;
         }
 
@@ -69,12 +71,16 @@ $result = mysqli_query($conn, $sql);
             </div>
         </div>
 
-        <!-- Download Button -->
+        <!-- Download and print Button -->
         <div class="row mb-4">
             <div class="col-md-6">
                 <a href="download_images.php" class="btn btn-primary">
                     <i class="bi bi-download"></i> Download All Images
                 </a>
+                <a href="javascript:void(0);" class="btn btn-primary" onclick="printTable()">
+                    <i class="bi bi-printer"></i> Print Table
+                </a>
+
             </div>
         </div>
 
@@ -141,6 +147,61 @@ $result = mysqli_query($conn, $sql);
             });
         });
     </script>
+
+    <script>
+        function printTable() {
+            // Get the HTML of the table
+            var tableHTML = document.querySelector('.table-responsive').innerHTML;
+
+            // Create a new window
+            var printWindow = window.open('', '', 'height=600,width=800');
+            printWindow.document.write('<html><head><title>Print Table</title>');
+            printWindow.document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">');
+            printWindow.document.write('</head><body>');
+            printWindow.document.write('<div class="table-responsive">');
+            printWindow.document.write(tableHTML);
+            printWindow.document.write('</div>');
+            printWindow.document.write('</body></html>');
+
+            // Close the document to finish loading the content
+            printWindow.document.close();
+
+            // Wait for the content to load and then print
+            printWindow.onload = function() {
+                printWindow.print();
+                printWindow.close();
+            };
+        }
+
+        $(document).ready(function() {
+            // Search functionality
+            $('#search').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                $('table tbody tr').each(function() {
+                    var rowText = $(this).text().toLowerCase();
+                    $(this).toggle(rowText.indexOf(value) > -1);
+                });
+            });
+
+            // Sorting functionality
+            $('#sort').on('change', function() {
+                var index = $(this).val();
+                var rows = $('table tbody tr').get();
+
+                rows.sort(function(a, b) {
+                    var A = $(a).children('td').eq(index).text().toUpperCase();
+                    var B = $(b).children('td').eq(index).text().toUpperCase();
+
+                    return A.localeCompare(B);
+                });
+
+                $.each(rows, function(index, row) {
+                    $('table tbody').append(row);
+                });
+            });
+        });
+    </script>
+
 
 </body>
 

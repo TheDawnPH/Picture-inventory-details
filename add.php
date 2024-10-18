@@ -57,8 +57,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (mysqli_stmt_execute($stmt)) {
                 mysqli_stmt_store_result($stmt);
                 if (mysqli_stmt_num_rows($stmt) > 0) {
-                    // if serial number is NA or N/A, allow duplicates
-                    if ($input_serial_number == "NA" || $input_serial_number == "N/A") {
+                    // if serial number is N/A, throw error
+                    if ($input_serial_number == "N/A") {
+                        $serial_number_err = "This serial number is not allowed.";
+                    } else {
+                        $serial_number = $input_serial_number;
+                    }
+                    // if serial number is NA, allow duplicates
+                    if ($input_serial_number == "NA") {
                         $serial_number = $input_serial_number;
                     } else {
                         $serial_number_err = "This serial number is already taken.";
@@ -159,6 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="icon" href="logo.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
     <style>
         h1 {
@@ -200,7 +207,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                     <div class="mb-3">
-                        <label for="serial_number" class="form-label">Serial Number</label>
+                        <label for="serial_number" class="form-label">Serial Number<br>
+                        <small id="serial_numberHelp" class="form-text text-muted">If the serial number is not applicable, enter <code>NA</code>.</small></label>
                         <input type="text" class="form-control <?php echo (!empty($serial_number_err)) ? 'is-invalid' : ''; ?>" id="serial_number" name="serial_number" value="<?php echo $serial_number; ?>" oninput="this.value = this.value.toUpperCase()" required>
                         <div class="invalid-feedback"><?php echo $serial_number_err; ?></div>
                     </div>
